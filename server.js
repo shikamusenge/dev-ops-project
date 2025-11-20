@@ -32,7 +32,7 @@ app.use((err, req, res, next) => {
 
 // Start server
 const server = app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+    console.log(`Server listening on port ${PORT} 🤷‍♀️🤷‍♀️`);
 });
 
 // Graceful shutdown
