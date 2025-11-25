@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Git hub actions Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            margin: 20px 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .section p, .section li {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .section ul {
+            margin-left: 25px;
+        }
+
+        .formula {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+        }
+
+        .example {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .btn-container {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            font-weight: bold;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .download-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .download-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 K-Means Clustering Algorithm</h1>
+            <p>Complete Guide with Formulas, Examples & Training Code</p>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Definition -->
+            <div class="section">
+                <h2>1. Definition</h2>
+                <p>K-Means is an <span class="highlight">unsupervised machine learning algorithm</span> that partitions a dataset into K clusters by minimizing the distance between points and their cluster centers (centroids).</p>
+            </div>
+
+            <!-- Section 2: Steps -->
+            <div class="section">
+                <h2>2. Steps of K-Means Algorithm</h2>
+                <ul class="steps">
+                    <li><strong>Choose K</strong> – Select the number of clusters you want to create.</li>
+                    <li><strong>Initialize centroids</strong> – Randomly select K points as initial centroids.</li>
+                    <li><strong>Assign points</strong> – Assign each data point to the nearest centroid.</li>
+                    <li><strong>Update centroids</strong> – Recalculate the centroid of each cluster as the mean of all points in the cluster.</li>
+                    <li><strong>Repeat</strong> – Continue steps 3-4 until convergence (centroids no longer change or move minimally).</li>
+                </ul>
+            </div>
+
+            <!-- Section 3: Formulas -->
+            <div class="section">
+                <h2>3. Formulas and Examples</h2>
+                
+                <h3>3.1 Euclidean Distance</h3>
+                <p>Used to measure the distance between a point and a centroid:</p>
+                <div class="formula">
+                    d(x, c) = √[(x₁ - c₁)² + (x₂ - c₂)² + ...]
+                </div>
+                <div class="example">
+                    <strong>Example:</strong> Distance between point (2,4) and centroid (5,1):
+                    <div class="formula">
+                        d = √[(2-5)² + (4-1)²] = √[9 + 9] = √18 = 4.24
+                    </div>
+                </div>
+
+                <h3>3.2 Updating Centroids</h3>
+                <p>Calculate the new centroid as the mean of all points in the cluster:</p>
+                <div class="formula">
+                    c = (1/n) × Σxᵢ
+                </div>
+                <div class="example">
+                    <strong>Example:</strong> Cluster points: (2,5), (3,7), (1,6)
+                    <div class="formula">
+                        cₓ = (2+3+1)/3 = 2<br>
+                        cᵧ = (5+7+6)/3 = 6<br>
+                        ✅ New centroid = (2, 6)
+                    </div>
+                </div>
+
+                <h3>3.3 SSE (Sum of Squared Errors)</h3>
+                <p>Measures the quality of clustering:</p>
+                <div class="formula">
+                    SSE = Σ ||xᵢ - c||²
+                </div>
+                <div class="example">
+                    <strong>Example:</strong> Cluster points: (2,5), (3,7), (1,6) | Centroid: (2,6)
+                    <div class="formula">
+                        • (2,5) → (2-2)² + (5-6)² = 1<br>
+                        • (3,7) → (3-2)² + (7-6)² = 2<br>
+                        • (1,6) → (1-2)² + (6-6)² = 1<br>
+                        SSE = 1 + 2 + 1 = 4
+                    </div>
+                </div>
+
+                <h3>3.4 Cluster Assignment Rule</h3>
+                <p><strong>Rule:</strong> Assign each point to the cluster with the smallest distance to its centroid.</p>
+                <div class="example">
+                    <strong>Example:</strong> Distances from a point: 4.2, 2.0, 5.5 → assign to cluster 2 (minimum distance)
+                </div>
+
+                <h3>3.5 Convergence Condition</h3>
+                <p>K-Means stops when centroids no longer move, or the movement is smaller than a threshold:</p>
+                <div class="formula">
+                    c⁽ᵗ⁾ = c⁽ᵗ⁻¹⁾
+                </div>
+            </div>
+
+            <!-- Section 4: Training Code -->
+            <div class="section">
+                <h2>4. Training Code (Python + sklearn)</h2>
+                <div class="code-block">from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+# Fit the model
+kmeans = KMeans(n_clusters=3, random_state=0)
+kmeans.fit(X)
+
+# Predicted labels
+labels = kmeans.labels_
+centroids = kmeans.cluster_centers_
+
+# Plotting
+plt.scatter(X[:,0], X[:,1], c=labels)
+plt.scatter(centroids[:,0], centroids[:,1], 
+            marker='x', s=100, color='red')
+plt.show()</div>
+            </div>
+
+            <!-- Section 5: Elbow Method -->
+            <div class="section">
+                <h2>5. Elbow Method Code (Choosing K)</h2>
+                <div class="code-block">sse = []
+for k in range(1, 10):
+    km = KMeans(n_clusters=k)
+    km.fit(X)
+    sse.append(km.inertia_)
+
+plt.plot(range(1,10), sse, marker='o')
+plt.xlabel('K (Clusters)')
+plt.ylabel('SSE')
+plt.title('Elbow Method')
+plt.show()</div>
+                <p style="margin-top: 15px;">💡 <strong>Tip:</strong> Look for the "elbow" point where SSE decreases slowly → optimal K.</p>
+            </div>
+
+            <!-- Section 6: Use Cases -->
+            <div class="section">
+                <h2>6. Use Cases</h2>
+                <ul>
+                    <li><strong>Customer Segmentation</strong> – Group similar customers for targeted marketing campaigns.</li>
+                    <li><strong>Image Compression</strong> – Reduce the number of colors in an image for efficient storage.</li>
+                    <li><strong>Outlier Detection</strong> – Identify anomalies and unusual patterns in datasets.</li>
+                    <li><strong>Document Clustering</strong> – Group similar text documents for organization and retrieval.</li>
+                    <li><strong>Pattern Recognition</strong> – Discover hidden patterns in large datasets.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button class="download-btn" onclick="generatePDF()">📥 Download PDF</button>
+        </div>
+    </div>
+
+    <script>
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            let yPos = 20;
+            const margin = 20;
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const maxWidth = pageWidth - 2 * margin;
+            
+            // Title
+            doc.setFontSize(24);
+            doc.setTextColor(102, 126, 234);
+            doc.text('K-Means Clustering Algorithm', pageWidth/2, yPos, { align: 'center' });
+            
+            yPos += 10;
+            doc.setFontSize(12);
+            doc.setTextColor(100, 100, 100);
+            doc.text('Complete Guide with Formulas, Examples & Code', pageWidth/2, yPos, { align: 'center' });
+            
+            yPos += 15;
+            
+            // Section 1: Definition
+            doc.setFontSize(16);
+            doc.setTextColor(102, 126, 234);
+            doc.text('1. Definition', margin, yPos);
+            yPos += 8;
+            
+            doc.setFontSize(10);
+            doc.setTextColor(50, 50, 50);
+            const def = 'K-Means is an unsupervised machine learning algorithm that partitions a dataset into K clusters by minimizing the distance between points and their cluster centers (centroids).';
+            const defLines = doc.splitTextToSize(def, maxWidth);
+            doc.text(defLines, margin, yPos);
+            yPos += defLines.length * 5 + 10;
+            
+            // Section 2: Steps
+            doc.setFontSize(16);
+            doc.setTextColor(102, 126, 234);
+            doc.text('2. Steps of K-Means Algorithm', margin, yPos);
+            yPos += 8;
+            
+            doc.setFontSize(10);
+            doc.setTextColor(50, 50, 50);
+            const steps = [
+                '1. Choose K - the number of clusters',
+                '2. Initialize centroids - randomly select K points',
+                '3. Assign points - assign each point to nearest centroid',
+                '4. Update centroids - recalculate as mean of cluster points',
+                '5. Repeat steps 3-4 until convergence'
+            ];
+            
+            steps.forEach(step => {
+                doc.text(step, margin + 5, yPos);
+                yPos += 6;
+            });
+            yPos += 10;
+            
+            // Section 3: Formulas
+            doc.setFontSize(16);
+            doc.setTextColor(102, 126, 234);
+            doc.text('3. Formulas and Examples', margin, yPos);
+            yPos += 10;
+            
+            // Euclidean Distance
+            doc.setFontSize(12);
+            doc.setTextColor(118, 75, 162);
+            doc.text('3.1 Euclidean Distance', margin, yPos);
+            yPos += 7;
+            
+            doc.setFontSize(10);
+            doc.setTextColor(50, 50, 50);
+            doc.text('d(x, c) = sqrt[(x1 - c1)^2 + (x2 - c2)^2 + ...]', margin + 5, yPos);
+            yPos += 7;
+            doc.text('Example: Distance between (2,4) and (5,1):', margin + 5, yPos);
+            yPos += 5;
+            doc.text('d = sqrt[(2-5)^2 + (4-1)^2] = sqrt[18] = 4.24', margin + 10, yPos);
+            yPos += 10;
+            
+            // Updating Centroids
+            doc.setFontSize(12);
+            doc.setTextColor(118, 75, 162);
+            doc.text('3.2 Updating Centroids', margin, yPos);
+            yPos += 7;
+            
+            doc.setFontSize(10);
+            doc.setTextColor(50, 50, 50);
+            doc.text('c = (1/n) * Sum(xi)', margin + 5, yPos);
+            yPos += 7;
+            doc.text('Example: Cluster points (2,5), (3,7), (1,6)', margin + 5, yPos);
+            yPos += 5;
+            doc.text('cx = (2+3+1)/3 = 2,  cy = (5+7+6)/3 = 6', margin + 10, yPos);
+            yPos += 5;
+            doc.text('New centroid = (2, 6)', margin + 10, yPos);
+            yPos += 10;
+            
+            // SSE
+            doc.setFontSize(12);
+            doc.setTextColor(118, 75, 162);
+            doc.text('3.3 SSE (Sum of Squared Errors)', margin, yPos);
+            yPos += 7;
+            
+            doc.setFontSize(10);
+            doc.setTextColor(50, 50, 50);
+            doc.text('SSE = Sum ||xi - c||^2', margin + 5, yPos);
+            yPos += 7;
+            doc.text('Example: Points (2,5), (3,7), (1,6) | Centroid (2,6)', margin + 5, yPos);
+            yPos += 5;
+            doc.text('(2,5): (2-2)^2 + (5-6)^2 = 1', margin + 10, yPos);
+            yPos += 5;
+            doc.text('(3,7): (3-2)^2 + (7-6)^2 = 2', margin + 10, yPos);
+            yPos += 5;
+            doc.text('(1,6): (1-2)^2 + (6-6)^2 = 1', margin + 10, yPos);
+            yPos += 5;
+            doc.text('SSE = 1 + 2 + 1 = 4', margin + 10, yPos);
+            yPos += 15;
+            
+            // New page for code
+            doc.addPage();
+            yPos = 20;
+            
+            // Section 4: Training Code
+            doc.setFontSize(16);
+            doc.setTextColor(102, 126, 234);
+            doc.text('4. Training Code (Python + sklearn)', margin, yPos);
+            yPos += 10;
+            
+            doc.setFontSize(9);
+            doc.setTextColor(50, 50, 50);
+            doc.setFont(undefined, 'mono');
+            const code1 = [
+                'from sklearn.cluster import KMeans',
+                'import matplotlib.pyplot as plt',
+                '',
+                '# Fit the model',
+                'kmeans = KMeans(n_clusters=3, random_state=0)',
+                'kmeans.fit(X)',
+                '',
+                '# Predicted labels',
+                'labels = kmeans.labels_',
+                'centroids = kmeans.cluster_centers_',
+                '',
+                '# Plotting',
+                'plt.scatter(X[:,0], X[:,1], c=labels)',
+                'plt.scatter(centroids[:,0], centroids[:,1],',
+                '            marker="x", s=100, color="red")',
+                'plt.show()'
+            ];
+            
+            code1.forEach(line => {
+                doc.text(line, margin + 5, yPos);
+                yPos += 5;
+            });
+            yPos += 10;
+            
+            // Section 5: Elbow Method
+            doc.setFont(undefined, 'normal');
+            doc.setFontSize(16);
+            doc.setTextColor(102, 126, 234);
+            doc.text('5. Elbow Method Code', margin, yPos);
+            yPos += 10;
+            
+            doc.setFontSize(9);
+            doc.setTextColor(50, 50, 50);
+            doc.setFont(undefined, 'mono');
+            const code2 = [
+                'sse = []',
+                'for k in range(1, 10):',
+                '    km = KMeans(n_clusters=k)',
+                '    km.fit(X)',
+                '    sse.append(km.inertia_)',
+                '',
+                'plt.plot(range(1,10), sse, marker="o")',
+                'plt.xlabel("K (Clusters)")',
+                'plt.ylabel("SSE")',
+                'plt.title("Elbow Method")',
+                'plt.show()'
+            ];
+            
+            code2.forEach(line => {
+                doc.text(line, margin + 5, yPos);
+                yPos += 5;
+            });
+            yPos += 10;
+            
+            // Section 6: Use Cases
+            doc.setFont(undefined, 'normal');
+            doc.setFontSize(16);
+            doc.setTextColor(102, 126, 234);
+            doc.text('6. Use Cases', margin, yPos);
+            yPos += 8;
+            
+            doc.setFontSize(10);
+            doc.setTextColor(50, 50, 50);
+            const useCases = [
+                'Customer Segmentation - Group similar customers',
+                'Image Compression - Reduce number of colors',
+                'Outlier Detection - Detect anomalies',
+                'Document Clustering - Group similar documents',
+                'Pattern Recognition - Discover hidden patterns'
+            ];
+            
+            useCases.forEach(useCase => {
+                doc.text('• ' + useCase, margin + 5, yPos);
+                yPos += 6;
+            });
+            
+            // Save the PDF
+            doc.save('K-Means_Algorithm_Guide.pdf');
+        }
+    </script>
+</body>
+</html>
